@@ -43,13 +43,15 @@ async function fetchMovies() {
     const data = await response.json();
 
     console.log('Retrieved movie data:', data);
+    
+        // Update movies in the Movies section
+        updateMovies(data.results);
+      } catch (error) {
+        console.error('Error fetching movie data:', error);
+      }
+    }
 
-    // Update movies in the Movies section
-    updateMovies(data.results);
-  } catch (error) {
-    console.error('Error fetching movie data:', error);
-  }
-}
+    
 
 // Function to update movies in the Movies section
 function updateMovies(movieData) {
@@ -90,3 +92,28 @@ function updateMovies(movieData) {
 
 // Call the fetchMovies function to initiate the API request
 fetchMovies();
+
+// Function to fetch player data from the NBA API
+async function fetchPlayers() {
+  const url = 'https://api-nba-v1.p.rapidapi.com/players/statistics?id=236&team=1&season=2022';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '9a656a9206msh5a8bdb13655f8fcp19174ajsnb4fdd2c00d58',
+      'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
+    }
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+
+    console.log('Retrieved player data:', data);
+
+    // Update web app's content with the player data
+    updatePlayers(data.api.statistics);
+  } catch (error) {
+    console.error('Error fetching player data:', error);
+  }
+}
+
