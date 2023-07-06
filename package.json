@@ -4,8 +4,7 @@
   "description": "",
   "main": "trends.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node trends.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -16,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jeffetale/Phase-1-Project/issues"
   },
-  "homepage": "https://github.com/jeffetale/Phase-1-Project#readme"
+  "homepage": "https://github.com/jeffetale/Phase-1-Project#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
