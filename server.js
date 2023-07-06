@@ -1,10 +1,12 @@
 // required dependencies
 const express = require('express');
-const fetch = require('node-fetch');
+const path = require('path');
 
-// Route to handle movie data request
 const app = express();
-const port = 8080; 
+const port = 8080;
+
+// Set the static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/movies', async (req, res) => {
   try {
