@@ -1,18 +1,15 @@
-// required dependencies
 const express = require('express');
-const path = require('path');
-
+const fetch = require('node-fetch');
 const app = express();
 const port = 8080;
 
-// Set the static folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 app.get('/movies', async (req, res) => {
   try {
     const apiKey = '6bb6396129e35fa891a4a9cae6482b04';
     const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&sort_by=popularity.desc`;
-    
+
     const response = await fetch(apiUrl);
     const data = await response.json();
 
@@ -24,8 +21,6 @@ app.get('/movies', async (req, res) => {
   }
 });
 
-// Start server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
