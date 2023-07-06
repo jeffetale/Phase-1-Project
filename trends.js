@@ -26,9 +26,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
     }
+  });
+
+  // Function to fetch movie data from the node server
+  async function fetchMovies() {
+    try {
+      const response = await fetch('/movies');
+      const data = await response.json();
+  
+      // Update web app's content with the movie data
+      updateMovies(data);
+    } catch (error) {
+      console.error('Error fetching movie data:', error);
+    }
+  }
+  
+  // Call the fetchMovies function to initiate the API request
+  fetchMovies();
+
+
+
 
     
-  });
   
   
 
