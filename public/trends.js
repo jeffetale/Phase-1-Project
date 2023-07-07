@@ -117,3 +117,33 @@ async function fetchPlayers() {
   }
 }
 
+ // Function to update players in the web app's content
+function updatePlayers(playerData) {
+  // Clear the existing content
+  const playersContainer = document.getElementById('players-container');
+  playersContainer.innerHTML = '';
+
+  // Iterate over the player data and create HTML elements to display the players
+  playerData.forEach(player => {
+    // Create a div element for each player
+    const playerDiv = document.createElement('div');
+    playerDiv.classList.add('player');
+      // Create an ID element for the player
+      const idElement = document.createElement('p');
+      idElement.textContent = `Player ID: ${player.playerId}`;
+  
+      // Create a heading element for the player name
+      const nameHeading = document.createElement('h3');
+      nameHeading.textContent = player.playerName;
+  
+      // Append the ID and name elements to the player div
+      playerDiv.appendChild(idElement);
+      playerDiv.appendChild(nameHeading);
+      
+       // Append the player div to the players container
+    playersContainer.appendChild(playerDiv);
+  });
+}
+
+// Call the fetchPlayers function to initiate the API request
+fetchPlayers();
