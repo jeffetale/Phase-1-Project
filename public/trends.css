@@ -42,6 +42,22 @@ body {
   nav ul li a:hover {
     color: #333;
   }
+
+  .search-bar input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: black;
+    font-size: 16px;
+    padding: 6px 10px;
+    width: 200px;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .search-bar input:focus {
+    width: 300px;
+  }
+  
   
   /* Main styles */
   main {
@@ -65,7 +81,7 @@ body {
   }
     
   section:hover > *:not(h2) {
-    transform: scale(1.2)
+    transform: scale(1.005)
   } 
   
   section h2 {
@@ -107,4 +123,30 @@ body {
     }
   }
   
+/* Additional styles for the sections with expanded items */
+section.expanded {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.section-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item.hidden {
+  display: none;
+}
+
 

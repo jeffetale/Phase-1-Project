@@ -16,6 +16,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  const searchInput = document.getElementById('searchInput');
+  
+  // Add event listener to hide the placeholder text when the input is clicked
+  searchInput.addEventListener('click', function() {
+    searchInput.placeholder = '';
+  });
+
   // Function to scroll to a section
   function scrollToSection(sectionId) {
     const targetSection = document.getElementById(sectionId);
@@ -27,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
+
 
 // Function to fetch movie data from the TMDB API
 async function fetchMovies() {
@@ -204,6 +212,5 @@ function displayMusicians(musicianData) {
     console.error('Error fetching musician data: No data found.');
   }
 }
-
 
 fetchMusicians();

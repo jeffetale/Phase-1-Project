@@ -21,7 +21,7 @@ Trends is a web application that displays trending movies, NBA players, top song
 
 1. Clone the repository: `git clone https://github.com/jeffetale/Phase-1-Project`
 2. Navigate to the project directory: `cd trends`
-3. Open the index.html file in a web browser.
+3. Open the public/trends.html file in a web browser.
 
 ## Usage
 
