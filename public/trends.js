@@ -154,3 +154,56 @@ function updatePlayers(playerData) {
 }
 
 fetchPlayers();
+
+async function fetchMusicians() {
+  const url = 'https://spotify23.p.rapidapi.com/artists/?ids=2w9zwq3AktTeYYMuhMjju8%2C3j0M4CXN9h%2C2X82ssf97737b8b9f8568%2C9vA6t241iJc3%2C36Mb1bOaH595q65658Rk1E%2C1221824%2C256v12XcE4o6908Y9k9542%2C7u2mI45m586Y52pU6q382m%2C2cE7l1tn36n70b73f3xr4j%2C7Jm92Rf8z113eC56l7220g%2C347t4uB01n7n1e643r4247';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '9a656a9206msh5a8bdb13655f8fcp19174ajsnb4fdd2c00d58',
+      'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
+    }
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    console.log('Retrieved musician data:', data);
+    displayMusicians(data);
+  } catch (error) {
+    console.error('Error fetching musician data:', error);
+  }
+}
+
+function displayMusicians(musicianData) {
+  const songsContainer = document.getElementById('songs-container');
+  songsContainer.innerHTML = '';
+
+  if (musicianData && Array.isArray(musicianData.artists)) {
+    const musicians = musicianData.artists.filter(musician => musician !== null);
+    const limitedMusiciansData = musicians.slice(0, 10);
+
+    limitedMusiciansData.forEach((musician, index) => {
+      const { name } = musician;
+
+      const musicianDiv = document.createElement('div');
+      musicianDiv.classList.add('musician');
+
+      const indexElement = document.createElement('p');
+      indexElement.textContent = `#${index + 1}`;
+
+      const nameElement = document.createElement('h2');
+      nameElement.textContent = name;
+
+      musicianDiv.appendChild(indexElement);
+      musicianDiv.appendChild(nameElement);
+
+      songsContainer.appendChild(musicianDiv);
+    });
+  } else {
+    console.error('Error fetching musician data: No data found.');
+  }
+}
+
+
+fetchMusicians();
