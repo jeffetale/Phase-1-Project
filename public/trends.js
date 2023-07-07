@@ -95,12 +95,16 @@ fetchMovies();
 
 // Function to fetch player data from the NBA API
 async function fetchPlayers() {
-  const url = 'https://api-nba-v1.p.rapidapi.com/players/statistics?id=236&team=1&season=2022';
+  const url = 'https://api-nba-v1.p.rapidapi.com/players?team=1&season=2021';
   const options = {
     method: 'GET',
     headers: {
       'X-RapidAPI-Key': '9a656a9206msh5a8bdb13655f8fcp19174ajsnb4fdd2c00d58',
       'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'
+    },
+    params: {
+      team: '1',
+      season: '2021'
     }
   };
 
@@ -110,40 +114,43 @@ async function fetchPlayers() {
 
     console.log('Retrieved player data:', data);
 
-    // Update web app's content with the player data
-    updatePlayers(data.api.statistics);
+    // Check if the response contains data
+    if (data && Array.isArray(data.response) && data.response.length > 0) {
+      // Update web app's content with the player data
+      updatePlayers(data.response);
+    } else {
+      // Handle missing player data
+      console.error('Error fetching player data: No player data found.');
+    }
   } catch (error) {
     console.error('Error fetching player data:', error);
   }
 }
 
- // Function to update players in the web app's content
 function updatePlayers(playerData) {
   // Clear the existing content
   const playersContainer = document.getElementById('players-container');
   playersContainer.innerHTML = '';
 
-  // Iterate over the player data and create HTML elements to display the players
-  playerData.forEach(player => {
+  // Limit the number of players to display to 10
+  const limitedPlayerData = playerData.slice(0, 10);
+
+  // Iterate over the limited player data and create HTML elements to display the players
+  limitedPlayerData.forEach(player => {
     // Create a div element for each player
     const playerDiv = document.createElement('div');
     playerDiv.classList.add('player');
-      // Create an ID element for the player
-      const idElement = document.createElement('p');
-      idElement.textContent = `Player ID: ${player.playerId}`;
-  
-      // Create a heading element for the player name
-      const nameHeading = document.createElement('h3');
-      nameHeading.textContent = player.playerName;
-  
-      // Append the ID and name elements to the player div
-      playerDiv.appendChild(idElement);
-      playerDiv.appendChild(nameHeading);
-      
-       // Append the player div to the players container
+
+    // Create a name element for the player
+    const nameElement = document.createElement('p');
+    nameElement.textContent = `Name: ${player.firstname} ${player.lastname}`;
+
+    // Append the name element to the player div
+    playerDiv.appendChild(nameElement);
+
+    // Append the player div to the players container
     playersContainer.appendChild(playerDiv);
   });
 }
 
-// Call the fetchPlayers function to initiate the API request
 fetchPlayers();
